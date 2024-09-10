@@ -88,7 +88,7 @@ box_css = """
         background-color: #4682B4;
         color: white;
         font-size: 18px;
-        padding: 20px;
+        padding: 40px;
         border-radius: 10px;
         text-align: center;
         height: 150px;
@@ -107,7 +107,7 @@ col3, col4 = st.columns(2)
 with col1:
     st.markdown(f"""
     <div class="box">
-        <p>This is how much you will make if you invest your money in Canada</p>
+        <p>This is your "Principal+ Return" if you invest your money in Canada</p>
         <p><b>{final_cad_value} CAD</b></p>
     </div>
     """, unsafe_allow_html=True)
@@ -116,7 +116,7 @@ with col1:
 with col2:
     st.markdown(f"""
     <div class="box">
-        <p>This is how much you will make if you invest your money in India</p>
+        <p>This is your "Principal+Return" if you invest your money in India</p>
         <p><b>{final_inr_value} INR</b></p>
     </div>
     """, unsafe_allow_html=True)
@@ -125,7 +125,7 @@ with col2:
 with col3:
     st.markdown(f"""
     <div class="box">
-        <p>This is how much you will make if you invest your money in India and convert to CAD</p>
+        <p>This is your "Principal +Return" if you invest your money in India and convert to CAD</p>
         <p><b>{final_inr_after_cad_conversion} CAD</b></p>
     </div>
     """, unsafe_allow_html=True)
@@ -134,7 +134,7 @@ with col3:
 with col4:
     st.markdown(f"""
     <div class="box">
-        <p>This is how much you will make if you invest your money in Canada and convert to INR</p>
+        <p>This is your 'Principal + Return" if you invest your money in Canada and convert to INR</p>
         <p><b>{final_cad_after_inr_conversion} INR</b></p>
     </div>
     """, unsafe_allow_html=True)
