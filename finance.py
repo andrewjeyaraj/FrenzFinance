@@ -134,6 +134,16 @@ elif depreciation_mode == 'Variable Depreciation':
     low_depreciation = st.number_input("Low Depreciation Rate (per year)", min_value=0.00, max_value=0.10, value=0.02)
     medium_depreciation = st.number_input("Medium Depreciation Rate (per year)", min_value=0.00, max_value=0.10, value=0.03)
     high_depreciation = st.number_input("High Depreciation Rate (per year)", min_value=0.00, max_value=0.10, value=0.05)
+    
+    
+    #Calculate preliminaries 
+    # Calculate final values in INR and CAD
+    final_inr_value = compound_interest(investment_inr, return_rate_inr_adjusted, years)
+    final_cad_value = compound_interest(investment_cad, return_rate_cad_adjusted, years)
+    
+    
+    
+    
     future_inr_to_cad_low = initial_inr_to_cad / depreciation_factor(low_depreciation, years)
     future_inr_to_cad_med = initial_inr_to_cad / depreciation_factor(medium_depreciation, years)
     future_inr_to_cad_high = initial_inr_to_cad / depreciation_factor(high_depreciation, years)
