@@ -143,8 +143,9 @@ with col4:
 if final_inr_after_cad_conversion < final_cad_value:
     min_return_inr = (final_cad_value / final_inr_value) ** (1 / 10) - 1  # Example 10-year calculation
     st.write(f"Minimum Annual Return in INR required to match CAD: {min_return_inr * 100:.2f}%")
+else:
 
-elif final_cad_after_inr_conversion < final_inr_value:
+
     min_return_cad = (final_inr_value / final_cad_value) ** (1 / 10) - 1  # Example 10-year calculation
     st.write(f"Minimum Annual Return in CAD required to match INR: {min_return_cad * 100:.2f}%")
 
