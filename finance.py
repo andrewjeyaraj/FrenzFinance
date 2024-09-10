@@ -25,6 +25,22 @@ st.title("Investment & Depreciation Calculator")
 investment_inr = st.number_input("Initial Investment (INR)", value=2000)
 initial_inr_to_cad = st.slider("Initial CAD to INR Exchange Rate", 50.0, 100.0, 60.0)
 investment_cad = investment_inr / initial_inr_to_cad
+# Show the fixed depreciation slider
+depreciation_rate = st.slider("INR Depreciation Rate (per year)", 0.00, 0.10, 0.03)
+# Input: USD to CAD exchange rate ranges
+usd_to_cad = st.slider("Initial USD to CAD Exchange Rate", 0.65, 1.0, 0.73)
+
+# Input: Return Rate (in INR and CAD)
+return_rate_inr = st.slider("Return Rate in INR (per year)", 0.00, 0.20, 0.15)
+mer_inr = st.slider("Management Expense Ratio for INR investment", 0.00, 0.05, 0.007)
+return_rate_inr_adjusted = return_rate_inr - mer_inr
+
+return_rate_cad = st.slider("Return Rate in CAD (per year)", 0.00, 0.10, 0.076)
+mer_cad = st.slider("Management Expense Ratio for CAD investment", 0.00, 0.05, 0.007)
+return_rate_cad_adjusted = return_rate_cad - mer_cad
+
+# Input: Investment Duration (Years)
+years = st.slider("Investment Duration (Years)", 1, 30, 10)
 
 depreciation_mode = st.radio(
     "Choose Depreciation Type",
@@ -32,22 +48,7 @@ depreciation_mode = st.radio(
 )
 
 if depreciation_mode == 'Fixed Depreciation':
-    # Show the fixed depreciation slider
-    depreciation_rate = st.slider("INR Depreciation Rate (per year)", 0.00, 0.10, 0.03)
-    # Input: USD to CAD exchange rate ranges
-    usd_to_cad = st.slider("Initial USD to CAD Exchange Rate", 0.65, 1.0, 0.73)
-
-    # Input: Return Rate (in INR and CAD)
-    return_rate_inr = st.slider("Return Rate in INR (per year)", 0.00, 0.20, 0.15)
-    mer_inr = st.slider("Management Expense Ratio for INR investment", 0.00, 0.05, 0.007)
-    return_rate_inr_adjusted = return_rate_inr - mer_inr
-
-    return_rate_cad = st.slider("Return Rate in CAD (per year)", 0.00, 0.10, 0.076)
-    mer_cad = st.slider("Management Expense Ratio for CAD investment", 0.00, 0.05, 0.007)
-    return_rate_cad_adjusted = return_rate_cad - mer_cad
-
-    # Input: Investment Duration (Years)
-    years = st.slider("Investment Duration (Years)", 1, 30, 10)
+    
 
     # Calculate final values in INR and CAD
     final_inr_value = compound_interest(investment_inr, return_rate_inr_adjusted, years)
