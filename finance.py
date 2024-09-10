@@ -29,7 +29,7 @@ investment_cad = investment_inr / initial_inr_to_cad
 depreciation_rate = st.slider("INR Depreciation Rate (per year)", 0.00, 0.10, 0.03)
 
 # Input: USD to CAD exchange rate ranges
-usd_to_cad = st.slider("Initial USD to CAD Exchange Rate", 0.65, 1, 0.73)
+usd_to_cad = st.slider("Initial USD to CAD Exchange Rate", 0.65, 1.0, 0.73)
 
 # Input: Return Rate (in INR and CAD)
 return_rate_inr = st.slider("Return Rate in INR (per year)", 0.00, 0.20, 0.15)
