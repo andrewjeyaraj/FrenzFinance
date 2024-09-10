@@ -70,15 +70,15 @@ final_cad_after_inr_conversion = final_inr_value * (1/future_inr_to_cad)
 # st.write(f"Profit or Loss in INR if CAD invested in Canada is converted to INR accounting for INR depreciation: {profit_cad_inr_convert:.2f} INR")
 
 # Comparing final returns after conversion
-if final_inr_after_cad_conversion < final_cad_value:
-    # If INR investment converted back to CAD gives a lower profit, calculate minimum INR return required
-    min_return_inr = (final_cad_value / investment_inr) ** (1 / years) - 1
-    st.write(f"Minimum Annual Return in INR required to match CAD: {min_return_inr * 100:.2f}%")
+# if final_inr_after_cad_conversion < final_cad_value:
+#     # If INR investment converted back to CAD gives a lower profit, calculate minimum INR return required
+#     min_return_inr = (final_cad_value / investment_inr) ** (1 / years) - 1
+#     st.write(f"Minimum Annual Return in INR required to match CAD: {min_return_inr * 100:.2f}%")
 
-if final_cad_after_inr_conversion < final_inr_value:
-    # If CAD investment converted back to INR gives a lower profit, calculate minimum CAD return required
-    min_return_cad = (final_inr_value / investment_cad) ** (1 / years) - 1
-    st.write(f"Minimum Annual Return in CAD required to match INR: {min_return_cad * 100:.2f}%")
+# if final_cad_after_inr_conversion < final_inr_value:
+#     # If CAD investment converted back to INR gives a lower profit, calculate minimum CAD return required
+#     min_return_cad = (final_inr_value / investment_cad) ** (1 / years) - 1
+#     st.write(f"Minimum Annual Return in CAD required to match INR: {min_return_cad * 100:.2f}%")
     
     
 # Custom CSS for the box styling
