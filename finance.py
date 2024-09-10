@@ -54,20 +54,20 @@ future_inr_to_cad = initial_inr_to_cad / depreciation_factor(depreciation_rate, 
 final_inr_after_cad_conversion = final_cad_value * future_inr_to_cad
 final_cad_after_inr_conversion = final_inr_value * (1/future_inr_to_cad)
 
-# Display results
-st.write(f"Final Value in INR after {years} years: {final_inr_value:.2f} INR")
-st.write(f"Final Value in CAD after {years} years: {final_cad_value:.2f} CAD")
-st.write(f"Future Exchange Rate (CAD to INR) after depreciation: {future_inr_to_cad:.2f}")
-st.write(f"Final INR value if CAD is invested in Canada and converted from CAD to INR after {years} years: {final_inr_after_cad_conversion:.2f} INR")
+# # Display results
+# st.write(f"Final Value in INR after {years} years: {final_inr_value:.2f} INR")
+# st.write(f"Final Value in CAD after {years} years: {final_cad_value:.2f} CAD")
+# st.write(f"Future Exchange Rate (CAD to INR) after depreciation: {future_inr_to_cad:.2f}")
+# st.write(f"Final INR value if CAD is invested in Canada and converted from CAD to INR after {years} years: {final_inr_after_cad_conversion:.2f} INR")
 
-# Profit or Loss
-profit_inr = final_inr_value - investment_inr
-profit_cad = final_cad_value * future_inr_to_cad - investment_inr
-profit_cad_inr_convert = final_cad_value * future_inr_to_cad - investment_inr
+# # Profit or Loss
+# profit_inr = final_inr_value - investment_inr
+# profit_cad = final_cad_value * future_inr_to_cad - investment_inr
+# profit_cad_inr_convert = final_cad_value * future_inr_to_cad - investment_inr
 
-st.write(f"Profit or Loss in INR: {profit_inr:.2f} INR")
-st.write(f"Profit or Loss in CAD: {profit_cad:.2f} CAD")
-st.write(f"Profit or Loss in INR if CAD invested in Canada is converted to INR accounting for INR depreciation: {profit_cad_inr_convert:.2f} INR")
+# st.write(f"Profit or Loss in INR: {profit_inr:.2f} INR")
+# st.write(f"Profit or Loss in CAD: {profit_cad:.2f} CAD")
+# st.write(f"Profit or Loss in INR if CAD invested in Canada is converted to INR accounting for INR depreciation: {profit_cad_inr_convert:.2f} INR")
 
 # Comparing final returns after conversion
 if final_inr_after_cad_conversion < final_cad_value:
