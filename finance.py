@@ -19,7 +19,7 @@ def depreciation_factor(rate, years):
     return (1 - rate) ** years
 
 # Dashboard title
-st.title("Investment & Depreciation Calculator")
+st.title(" CAD & INR Investment & Depreciation Calculator")
 
 # Input: Initial Investment
 investment_inr = st.number_input("Initial Investment (INR)", value=2000)
