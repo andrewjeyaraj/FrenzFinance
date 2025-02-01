@@ -14,6 +14,9 @@ from math import sqrt
 from sklearn.metrics import mean_squared_error
 import json
 import os
+import plotly.express as px
+import plotly.graph_objects as go
+
 
 # Streamlit App Title
 st.title("Stock Price Prediction App")
@@ -77,13 +80,36 @@ dat = yf.Ticker(ticker_symbol)
 stock_data = dat.history(period="5y")
 
 # Plot Historical Data
-fig, ax = plt.subplots()
-ax.plot(stock_data.index, stock_data['Close'], label='Close Price', color='blue')
-ax.set_xlabel("Time")
-ax.set_ylabel("Price")
-ax.set_title(f"{selected_ticker} Closing Price History")
-ax.legend()
-st.pyplot(fig)
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=stock_data.index, 
+    y=stock_data['Close'], 
+    mode='lines',
+    name='Close Price',
+    line=dict(color='blue'),
+    hovertemplate="Date: %{x}<br>Price: %{y:.2f} USD"
+))
+
+# Update layout to match original Matplotlib style
+fig.update_layout(
+    title=f"{selected_ticker} Closing Price History",
+    xaxis_title="Time",
+    yaxis_title="Price",
+    hovermode="x unified",
+    template="plotly_white"
+)
+
+# Show in Streamlit
+st.plotly_chart(fig, use_container_width=True)
+# fig, ax = plt.subplots()
+# ax.plot(stock_data.index, stock_data['Close'], label='Close Price', color='blue')
+# ax.set_xlabel("Time")
+# ax.set_ylabel("Price")
+# ax.set_title(f"{selected_ticker} Closing Price History")
+# ax.legend()
+# st.pyplot(fig)
 
 # Enter number of months to predict
 n_predict = st.number_input("Enter No. of Months to Predict:", min_value=1, max_value=60, value=6, step=1)
@@ -128,17 +154,51 @@ if st.button("Predict"):
     forecast_df.set_index('Date', inplace=True)
     
     
+    # Create Interactive Plot for Predicted Prices
+    fig2 = go.Figure()
     
-    # Plot predictions
-    st.subheader("Predicted Price")
-    fig2, ax2 = plt.subplots()
-    ax2.plot(stock_data.index, stock_data['Close'], label='Actual Data', color='blue')
-    ax2.plot(forecast_df.index, forecast_df['Forecast'], label='Predicted Data', linestyle='--', marker='o', color='red')
-    ax2.set_xlabel("Time")
-    ax2.set_ylabel("Price")
-    ax2.set_title(f"{selected_ticker} Predicted Closing Price")
-    ax2.legend()
-    st.pyplot(fig2)
+    # Add Historical Data
+    fig2.add_trace(go.Scatter(
+        x=stock_data.index, 
+        y=stock_data['Close'], 
+        mode='lines',
+        name='Actual Data',
+        line=dict(color='blue'),
+        hovertemplate="Date: %{x}<br>Actual Price: %{y:.2f} USD"
+    ))
+    
+    # Add Forecast Data
+    fig2.add_trace(go.Scatter(
+        x=forecast_df.index, 
+        y=forecast_df['Forecast'], 
+        mode='lines+markers',
+        name='Predicted Data',
+        line=dict(dash='dot', color='red'),
+        marker=dict(size=6),
+        hovertemplate="Date: %{x}<br>Predicted Price: %{y:.2f} USD"
+    ))
+    
+    # Update layout to match Matplotlib-style structure
+    fig2.update_layout(
+        title=f"{selected_ticker} Predicted Closing Price",
+        xaxis_title="Time",
+        yaxis_title="Stock Price",
+        hovermode="x unified",
+        template="plotly_white"
+    )
+
+# Show in Streamlit
+    st.plotly_chart(fig2, use_container_width=True)
+    # # Plot predictions
+    # st.subheader("Predicted Price")
+    # fig2, ax2 = plt.subplots()
+    # ax2.plot(stock_data.index, stock_data['Close'], label='Actual Data', color='blue')
+    # ax2.plot(forecast_df.index, forecast_df['Forecast'], label='Predicted Data', linestyle='--', marker='o', color='red')
+    # ax2.set_xlabel("Time")
+    # ax2.set_ylabel("Price")
+    # ax2.set_title(f"{selected_ticker} Predicted Closing Price")
+    # ax2.legend()
+    # st.pyplot(fig2)
     
     # After Showing the Prediction, Add an Interpretation Guide
     st.markdown("## 📊 Interpreting the Results")
