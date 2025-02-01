@@ -8,3 +8,4 @@ plotly
 torch
 numpy
 scipy
+pandas-market-calendars
