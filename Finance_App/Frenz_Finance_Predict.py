@@ -269,7 +269,7 @@ elif selected_model == "Ticknor (2013)":
             st.markdown(f"### 📊 The stock price at close on **{next_trading_day}** is predicted to be **${predicted_price:.2f}**")
             st.caption("🚨 Please proceed with caution as market closure affects training data availability.")
         else:
-            st.markdown(f"### 📊 The predicted price at close for end of day **({next_trading_day})** is **${predicted_price:.2f}**")
+            st.markdown(f"### 📊 The predicted price at close for end of day **({next_trading_day})** is **${predicted_price:.2f} USD**")
 
         # ✅ Show MEP if needed
         st.sidebar.write("###  Model Mean Error Percentage (MEP)")
