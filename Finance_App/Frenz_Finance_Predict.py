@@ -129,43 +129,46 @@ the average error in prediction found while training the model to the final pric
 
 # Predict button
 if st.button("Predict"):
+    with st.status("⏳ Computing... This can take up to a minute", expanded=False):
     
-    # Train ARIMA model on full dataset
-    model = ARIMA(stock_data['Close'], order=(15,1,0))
-    model_fit = model.fit()
-    
-    # Forecast future prices
-    forecast = model_fit.forecast(steps=n_predict)
-    
-    # Compute RMS if enabled
-    if apply_rms:
-        train_data = stock_data['Close'][:-n_predict]
-        test_data = stock_data['Close'][-n_predict:]
-        test_pred = model_fit.forecast(steps=len(test_data))
-        rmse = sqrt(mean_squared_error(test_data, test_pred))
-        forecast += rmse  # Apply RMSE margin
-    
-    # Generate future dates
-    last_date = stock_data.index[-1]
-    future_dates = [last_date + pd.DateOffset(months=i) for i in range(1, n_predict + 1)]
-    
-    # Convert forecast to DataFrame
-    forecast_df = pd.DataFrame({'Date': future_dates, 'Forecast': forecast})
-    forecast_df.set_index('Date', inplace=True)
-    
-    
-    # Create Interactive Plot for Predicted Prices
-    fig2 = go.Figure()
-    
-    # Add Historical Data
-    fig2.add_trace(go.Scatter(
-        x=stock_data.index, 
-        y=stock_data['Close'], 
-        mode='lines',
-        name='Actual Data',
-        line=dict(color='blue'),
-        hovertemplate="Date: %{x}<br>Actual Price: %{y:.2f} USD"
-    ))
+        # Train ARIMA model on full dataset
+        model = ARIMA(stock_data['Close'], order=(15,1,0))
+        model_fit = model.fit()
+        
+        # Forecast future prices
+        forecast = model_fit.forecast(steps=n_predict)
+        
+        # Compute RMS if enabled
+        if apply_rms:
+            train_data = stock_data['Close'][:-n_predict]
+            test_data = stock_data['Close'][-n_predict:]
+            test_pred = model_fit.forecast(steps=len(test_data))
+            rmse = sqrt(mean_squared_error(test_data, test_pred))
+            forecast += rmse  # Apply RMSE margin
+        
+        # Generate future dates
+        last_date = stock_data.index[-1]
+        future_dates = [last_date + pd.DateOffset(months=i) for i in range(1, n_predict + 1)]
+        
+        # Convert forecast to DataFrame
+        forecast_df = pd.DataFrame({'Date': future_dates, 'Forecast': forecast})
+        forecast_df.set_index('Date', inplace=True)
+        
+        
+        # Create Interactive Plot for Predicted Prices
+        fig2 = go.Figure()
+        
+        # Add Historical Data
+        fig2.add_trace(go.Scatter(
+            x=stock_data.index, 
+            y=stock_data['Close'], 
+            mode='lines',
+            name='Actual Data',
+            line=dict(color='blue'),
+            hovertemplate="Date: %{x}<br>Actual Price: %{y:.2f} USD"
+        ))
+    # Once done, continue with the rest of the app
+    st.success("✅ Prediction complete!")
     
     # Add Forecast Data
     fig2.add_trace(go.Scatter(
@@ -222,6 +225,39 @@ if st.button("Predict"):
     st.caption("🚨 **This prediction is not financial advice. Always conduct your own research before investing.**")
     
     
+    # Add Two Vertical Spaces
+    st.markdown("<br>", unsafe_allow_html=True)
 # Clear button
 if st.button("Clear"):
     st.rerun()
+    #Add Two Vertical Spaces
+st.markdown("<br><br>", unsafe_allow_html=True)
+
+    
+    
+    
+st.markdown("""
+## ☕ Want More?  
+If you like this app and want to support further improvements, consider buying me a coffee!  
+""", unsafe_allow_html=True)
+
+
+
+
+# Buy Me a Coffee Button (Replace with Your Link)
+st.markdown("""
+<a href="https://www.buymeacoffee.com/andyj" target="_blank">
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=YOURUSERNAME&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff" width="200">
+</a>
+""", unsafe_allow_html=True)
+    
+    
+    
+    
+# # Clear button
+# if st.button("Clear"):
+#     st.rerun()
+#     #Add Two Vertical Spaces
+# st.markdown("<br><br>", unsafe_allow_html=True)
+
+    
